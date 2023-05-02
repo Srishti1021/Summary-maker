@@ -103,7 +103,9 @@ header {
 
 
 
-.input-box input {
+.input-box input[type = "text"],
+.input-box input[type = "number"],
+.input-box input[type = "date"] {
     width: 100%;
     height: 100%;
     background: transparent;
@@ -131,4 +133,6 @@ header {
 
 }
 
-
+.input-box-radio{
+    color: white;
+}

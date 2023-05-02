@@ -27,22 +27,39 @@
   <div class="wrapper">
     <div class="form-box">
       <h2>PROFILE INFO</h2>
-      <form action="#" method="POST">
+      <form method="POST">
         <div class="input-box">
-            <label for="contact" id="contact">Contact No.</label>
-            <input type="number" id="contact" required>
+            <label for="contact" id="contact" name="contact">Contact No.</label>
+            <input type="number" id="contact" name="contact" required>
         </div>
         
-        <div class="input-box">
-          <label for="gender" id="gender">Gender?</label>
-          <input type="text" id="gender" required>
-        </div>
-
+       
         <div class="input-box">
             <label for="dob" id="dob">Date of Birth</label>
-            <input type="date" id="dob" required/>
+            <input type="date" id="dob" required name="dob"/>
         </div>
-
+        <div class="input-box-radio ">
+          <div>Gender</div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gender" id="female">
+            <label class="form-check-label" for="female">
+              Female
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gender" id="male" checked>
+            <label class="form-check-label" for="male">
+              Male
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gender" id="other">
+            <label class="form-check-label" for="other">
+              Dont want to disclose
+            </label>
+          </div>
+        </div>
+        <hr>  
         <button class="btn" type="submit" value="submit">
             SUBMIT
         </button>

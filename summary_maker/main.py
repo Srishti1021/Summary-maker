@@ -7,7 +7,7 @@ from sqlalchemy import engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import scoped_session
 from werkzeug.utils import secure_filename
-from database import User, File
+from database import User, File, Profile
 import re
 from utils import *
 
@@ -76,13 +76,14 @@ def signup():
                     if cpassword and cpassword == password:
                         try:
                             sess = getdb()
-                            newuser = User(name=name,email=email,password=password,cpassword=cpassword)
+                            newuser = User(name=name,email=email,password=password)
                             sess.add(newuser)
                             sess.commit()
                             del sess
                             flash('registration successful','success')
                             return redirect('/login')
-                        except:
+                        except Exception as e:
+                            print('here',e)
                             flash('email account already exists','danger')
                     else:
                         flash('confirm password does not match','danger')
@@ -138,7 +139,36 @@ def upload():
 
 @app.route('/profile',methods=['GET','POST'])
 def profile():
-    return render_template('profile.html',title='profile')
+    if request.method == 'POST':
+        contact = request.form.get('contact')
+        gender = request.form.get('gender')
+        dob = request.form.get('dob')
+        if len(contact) == 0 or len(gender) == 0 or len(dob) == 0:
+            flash('please fill all the fields','danger')
+            return redirect('/profile')
+        db = getdb()
+        profile = db.query(Profile).filter_by(uid=session['id']).first()
+        if profile is not None:
+            profile.contact = contact
+            profile.dob = dob
+            profile.gender = gender
+            db.commit()
+            db.close()
+            flash('profile updated','success')
+            return redirect('/profile')
+        else:
+            flash('profile not found','danger')
+            return redirect('/profile')
+    try:
+        db = getdb()
+        profile = db.query(Profile).filter_by(uid=session['id']).first()
+        if profile is not None:
+            return render_template('profile.html',title='profile', profile=profile)
+        else:
+            return render_template('profile.html',title='profile')
+    except:
+        return render_template('profile.html',title='profile')
+
 
 @app.route('/contact')
 def contact():

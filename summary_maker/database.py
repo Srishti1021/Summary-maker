@@ -11,15 +11,26 @@ Base = declarative_base()
 class User(Base):
     __tablename__ = 'users' 
     id = Column(Integer, primary_key=True)
-    email = Column(String(50), unique=True)
     name = Column(String(50))
+    email = Column(String(50), unique=True)
     password = Column(String(64))
     group = Column(Integer, default=1)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
 
     def __repr__(self) -> str:
         return f'{self.id}|{self.name}|{self.group}'
+    
+class Profile(Base):
+    __tablename__ = 'profiles'
+    id = Column(Integer, primary_key=True)
+    uid = Column(Integer, ForeignKey("users.id"))
+    contact = Column(String(50), default='9234567890')
+    gender = Column(String(50), default='Male')
+    dob = Column(String(50), default='01/01/2000')
+    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
 
+    def __repr__(self) -> str:
+        return self.id
 
 class File(Base):
     __tablename__ = 'files'

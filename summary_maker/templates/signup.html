@@ -29,34 +29,34 @@
   <div class="wrapper">
     <div class="form-box signup">
       <h2>Signup</h2>
-      <form action="#" method="POST">
-      <div class="input-box">
-          <span class="icon"><ion-icon name="person"></ion-icon></span>
-          <input type="text" name="name" id="name" required>
-          <label>Name</label>
-      </div>
-      <div class="input-box">
-        <span class="icon"><ion-icon name="mail"></ion-icon>
-        </span>
-        <input type="email" name="email" id="email" required>
-        <label>Email </label>
-      </div>
-      <div class="input-box">
+      <form method="POST">
+        <div class="input-box">
+            <span class="icon"><ion-icon name="person"></ion-icon></span>
+            <input type="text" name="name" id="name" required>
+            <label>Name</label>
+        </div>
+        <div class="input-box">
+          <span class="icon"><ion-icon name="mail"></ion-icon>
+          </span>
+          <input type="email" name="email" id="email" required>
+          <label>Email </label>
+        </div>
+        <div class="input-box">
+            <span class="icon"><ion-icon name="lock-closed"></ion-icon>
+            </span>
+          <input type="password" name="password" id="password" required>
+          <label>Password</label>
+        </div>
+        <div class="input-box">
           <span class="icon"><ion-icon name="lock-closed"></ion-icon>
           </span>
-        <input type="password" name="password" id="password" required>
-        <label>Password</label>
-      </div>
-      <div class="input-box">
-        <span class="icon"><ion-icon name="lock-closed"></ion-icon>
-        </span>
-      <input type="password" name="cpassword" id="cpassword" required>
-      <label>Confirm Password</label>
-      </div>
-      <button type="submit" class="btn btn-success">Signup</button>
-        <div class="signup-register">
-          <p>Have an account? <a href="/login" class="login-link">Login</a></p>
+        <input type="password" name="cpassword" id="cpassword" required>
+        <label>Confirm Password</label>
         </div>
+        <a href="/login"><button type="submit" class="btn btn-success">Signup</button></a>
+          <div class="signup-register">
+            <p>Have an account? <a href="/login" class="login-link">Login</a></p>
+          </div>
       </form>
       </div>
   </div>
