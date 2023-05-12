@@ -10,6 +10,7 @@ from werkzeug.utils import secure_filename
 from database import User, File, Profile
 import re
 from utils import *
+from text_summarizer import text_summarizer
 
 ALLOWED_EXTENSIONS = ['txt','pdf','wav','mp3', 'mp4', 'doc','docx', 'mov' , 'wmv', 'flv', 'avi' 'mkv', 'webm' ]
 
@@ -114,31 +115,48 @@ def allowed_file(filename):
 def upload():
     if request.method == 'POST':
         # check if the post request has the file part
-        if 'file' not in request.files:
-            flash('No file part')
-            return redirect('/upload')
+        text = request.form.get('message','')
         file = request.files['file']
-        # If the user does not select a file, the browser submits an
-        # empty file without a filename.
-        if file.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
-        if file and allowed_file(file.filename):
-            file_type = request.form.get('file_type')
-            filename = secure_filename(file.filename)
-            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            sess = getdb()
-            new_file = File(filename=filename,file_path = file_path, file_type = file_type)
-            sess.add(new_file)
-            sess.commit()
-            del sess
-            flash('File Uploaded')
-            return redirect(url_for('view_file', name=filename, file_type=file_type))
+        if len(text) > 0:
+            print(text)
+            result = text_summarizer(text)
+            session['result'] = result
+            return redirect(url_for('view_file', name='summary', file_type='text'))
+
+        if 'file' in request.files:
+            if file.filename == '':
+                flash('No selected file')
+                return redirect(request.url)
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                file_type = filename.split('.')[-1]
+                file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                sess = getdb()
+                new_file = File(filename=filename,file_path = file_path, file_type = file_type, user_id = session['id'])
+                sess.add(new_file)
+                sess.commit()
+                del sess
+                flash('File Uploaded')
+                with open(file_path,'r') as f:
+                    text = f.read()
+                result = text_summarizer(text)
+                session['result'] = result
+                return redirect(url_for('view_file', name=filename, file_type=file_type))
     return render_template('upload.html',title='upload')
+
+@app.route('/view_file/<name>/<file_type>')
+def view_file(name,file_type):
+    if name == 'summary':
+        return render_template('view_file.html',title='view_file',name=name,file_type=file_type,result=session['result'])
+    else:
+        return render_template('view_file.html',title='view_file',name=name,file_type=file_type, result=session['result'])
 
 @app.route('/profile',methods=['GET','POST'])
 def profile():
+    if not session.get('isauth'):
+        flash('please login first','danger')
+        return redirect('/login')
     if request.method == 'POST':
         contact = request.form.get('contact')
         gender = request.form.get('gender')
@@ -155,12 +173,17 @@ def profile():
             db.commit()
             db.close()
             flash('profile updated','success')
-            return redirect('/profile')
+            return redirect('/info')
         else:
-            flash('profile not found','danger')
+            profile = Profile(uid=session['id'], contact=contact, gender=gender, dob=dob)
+            db.add(profile)
+            db.commit()
+            db.close()
+            flash('profile created','success')
             return redirect('/profile')
     try:
         db = getdb()
+        print('uid',session['id'])
         profile = db.query(Profile).filter_by(uid=session['id']).first()
         if profile is not None:
             return render_template('profile.html',title='profile', profile=profile)
@@ -168,11 +191,31 @@ def profile():
             return render_template('profile.html',title='profile')
     except:
         return render_template('profile.html',title='profile')
-
+    
 
 @app.route('/contact')
 def contact():
     return render_template('contact.html',title='contact')
+
+@app.route('/info')
+def info():
+    if not session.get('isauth'):
+        flash('please login first','danger')
+        return redirect('/login')
+    else:
+        try:
+            db = getdb()
+            user = db.query(User).filter_by(uid=session['id']).first()
+            if user:
+                profile = db.query(Profile).filter_by(uid=session['id']).first()
+                return render_template('profile_info.html',
+                                title='Profile Information',
+                                profile=profile, user=user)
+            else:
+                return render_template('profile_info.html',title='Profile Information')
+        except:
+            flash('please create profile first','danger')
+    return render_template('profile_info.html',title='Profile Information')
                            
                            
 

@@ -23,20 +23,20 @@
       <a href="/logout">LOGOUT</a>
     </nav>
   </header>
-
+  {% include "notification.html" %}
   <div class="wrapper">
     <div class="form-box">
       <h2>PROFILE INFO</h2>
       <form method="POST">
         <div class="input-box">
-            <label for="contact" id="contact" name="contact">Contact No.</label>
-            <input type="number" id="contact" name="contact" required>
+          <label for="contact" id="contact" name="contact" >Contact No.</label>
+          <input type="number" id="contact" name="contact" value="{{profile.contact}}" required>
         </div>
         
-       
+        
         <div class="input-box">
-            <label for="dob" id="dob">Date of Birth</label>
-            <input type="date" id="dob" required name="dob"/>
+          <label for="dob" id="dob">Date of Birth</label>
+          <input type="date" id="dob" required name="dob" value="{{profile.dob}}" />
         </div>
         <div class="input-box-radio ">
           <div>Gender</div>
@@ -61,10 +61,10 @@
         </div>
         <hr>  
         <button class="btn" type="submit" value="submit">
-            SUBMIT
+          SUBMIT
         </button>
       </form>
-      </div>
+    </div>
   </div>
   <main>
     
@@ -73,7 +73,7 @@
     <!-- place footer here -->
   </footer>
   <!-- Bootstrap JavaScript Libraries -->
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
   integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
 </script>
 

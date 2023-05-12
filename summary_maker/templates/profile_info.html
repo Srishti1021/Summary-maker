@@ -12,43 +12,39 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
   integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
   
-  <link rel="stylesheet" href="static/style_signup.css">
+  <link rel="stylesheet" href="static/profile_info.css">
 </head>
 
 <body>
   {% include "header.html" %}
-  {% include "notification.html" %}
   <div class="wrapper">
     <div class="form-box signup">
-      <h2>Signup</h2>
+      <h2>Profile Info</h2>
       <form method="POST">
-        <div class="input-box">
-          <span class="icon"><ion-icon name="person"></ion-icon></span>
-          <input type="text" name="name" id="name" required>
+        <div class="output-box">
           <label>Name</label>
-        </div>
-        <div class="input-box">
-          <span class="icon"><ion-icon name="mail"></ion-icon>
-          </span>
-          <input type="email" name="email" id="email" required>
-          <label>Email </label>
-        </div>
-        <div class="input-box">
-            <span class="icon"><ion-icon name="lock-closed"></ion-icon>
-            </span>
-          <input type="password" name="password" id="password" required>
-          <label>Password</label>
-        </div>
-        <div class="input-box">
-          <span class="icon"><ion-icon name="lock-closed"></ion-icon>
-          </span>
-        <input type="password" name="cpassword" id="cpassword" required>
-        <label>Confirm Password</label>
-        </div>
-        <a href="/login"><button type="submit" class="btn btn-success">Signup</button></a>
-          <div class="signup-register">
-            <p>Have an account? <a href="/login" class="login-link">Login</a></p>
+          <output type="name" name="name" id="name" value="{{user.name}}" required></output>
           </div>
+        <div class="output-box">
+          <label>Email </label>
+          <output type="email" name="email" id="email" value="{{user.email}}" required>
+        </div>
+        <div class="output-box">
+          <label>Contact Number</label>
+          <output type="number" name="contact" id="contact" value="{{profile.contact}}"  required>
+          
+        </div>
+        <div class="output-box">
+          <label>Gender</label>
+          <output type="gender" name="gender" id="gender" value="{{profile.gender}}" required>
+          
+        </div>
+        <div class="output-box">
+          <label>DOB</label>
+          <output type="date" name="dob" id="dob" value="{{profile.dob}}" required>
+          
+        </div>
+
         </form>
       </div>
   </div>
