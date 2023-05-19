@@ -16,14 +16,8 @@
 </head>
 
 <body>
-  <header>
-    <h2 class="logo">Logo</h2>
-    <nav class="navigation">
-      <a href="/profile">PROFILE</a>
-      <a href="/history">HISTORY</a>
-      <a href="/logout">LOGOUT</a>
-    </nav>
-  </header>
+  {% include "header.html" %}
+  {% include "notification.html" %}
   <main>
     <div class= "wrapper">
       <form class="form-box" method="post" enctype="multipart/form-data">
@@ -40,7 +34,7 @@
 
                       </div>
                       <div class="d-grid gap-2">
-                         <a href="/upload"><button type="submit" class="btn1">SUBMIT</button></a>
+                         <a href="/summary"><button type="submit" class="btn1">GENERATE SUMMARY</button></a>
                       </div>
         </div>
       </form>

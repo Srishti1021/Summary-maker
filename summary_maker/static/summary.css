@@ -10,7 +10,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-image: url("i10.jpg");
+    background-image: url("m2.jpg");
     background-size: cover;
     background-position: center;
 }
@@ -62,54 +62,88 @@ header {
     transform-origin: left;
 }
 
-
 .wrapper {
     position: relative;
     width: 600px;
-    height: 530px;
+    height: 620px;
     background: transparent;
     border: 2px solid rgba(255, 255, 255, 0.5);
     border-radius: 20px;
-    backdrop-filter: blur(50px);
+    backdrop-filter: blur(20px);
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 750px;
+    margin-left: 750px;
     margin-top: 45px;
+
 }
 
-.wrapper .form-box {
+.wrapper .summary-box{
     width: 100%;
-    padding: 40px;
-    
+    padding: 20px;
 }
 
-
-.wrapper .form-box h2 {
+.wrapper .summary-box h2{
     color: #fff;
-    font-size: 2em;
+    font-size: 3em;
     text-align: center;
+    font-weight: 700;
 }
 
-.output-box {
+.wrapper .summary-box .sb{
     position: relative;
     width: 100%;
-    height: 50px;
-    margin: 30px 0;
 }
 
-.output-box label {
-    position: absolute;
+.sb label{
+    position: relative;
     top: 50%;
     left: 5px;
+    color:#fff;
+    font-size: 1.5em;
+    font-weight: 700;
+    padding: 0 15px 0 15px;
+}
+
+.sb output{
+    position: relative;
+    top: 50%;
+    left: 5px;
+    color:#fff;
     font-size: 1em;
-    color: #fff;
     font-weight: 500;
+    padding: 0 15px 0 15px;
+}
+
+.btn1 {
+    width: 46%;
+    height: 45px;
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #030303;
+    font-weight: 1000;
+    margin-right: 10px;
+    text-align: center;
 
 }
 
+.btn2 {
+    width: 47%;
+    height: 45px;
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #030303;
+    font-weight: 1000;
+    margin-left: 10px;
+    margin-right: 10px;
 
-
-
-
+}

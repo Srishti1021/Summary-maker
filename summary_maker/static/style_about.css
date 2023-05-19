@@ -101,16 +101,10 @@ header {
     width: 100%;
     min-height: 100vh;
     display: flex;
+    background-image: url("j2.jpg");
 
 }
-.bg-1{
-flex: 1;
-background-color: rgb(47, 59, 223);
-}
-.bg-2{
-flex: 1;    
-background-color: rgb(90, 171, 232);
-}
+
 .about-container{
     width: 85%;
     min-height: 75vh;

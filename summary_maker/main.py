@@ -49,7 +49,7 @@ def login():
                         session['name'] = user.name
                         del sess
                         flash('login successfull','success')
-                        return redirect('/profile')
+                        return redirect('/info')
                     else:
                         flash('email or password is wrong','danger')
                 except Exception as e:
@@ -145,52 +145,9 @@ def upload():
                 return redirect(url_for('view_file', name=filename, file_type=file_type))
     return render_template('upload.html',title='upload')
 
-@app.route('/view_file/<name>/<file_type>')
-def view_file(name,file_type):
-    if name == 'summary':
-        return render_template('view_file.html',title='view_file',name=name,file_type=file_type,result=session['result'])
-    else:
-        return render_template('view_file.html',title='view_file',name=name,file_type=file_type, result=session['result'])
-
-@app.route('/profile',methods=['GET','POST'])
-def profile():
-    if not session.get('isauth'):
-        flash('please login first','danger')
-        return redirect('/login')
-    if request.method == 'POST':
-        contact = request.form.get('contact')
-        gender = request.form.get('gender')
-        dob = request.form.get('dob')
-        if len(contact) == 0 or len(gender) == 0 or len(dob) == 0:
-            flash('please fill all the fields','danger')
-            return redirect('/profile')
-        db = getdb()
-        profile = db.query(Profile).filter_by(uid=session['id']).first()
-        if profile is not None:
-            profile.contact = contact
-            profile.dob = dob
-            profile.gender = gender
-            db.commit()
-            db.close()
-            flash('profile updated','success')
-            return redirect('/info')
-        else:
-            profile = Profile(uid=session['id'], contact=contact, gender=gender, dob=dob)
-            db.add(profile)
-            db.commit()
-            db.close()
-            flash('profile created','success')
-            return redirect('/profile')
-    try:
-        db = getdb()
-        print('uid',session['id'])
-        profile = db.query(Profile).filter_by(uid=session['id']).first()
-        if profile is not None:
-            return render_template('profile.html',title='profile', profile=profile)
-        else:
-            return render_template('profile.html',title='profile')
-    except:
-        return render_template('profile.html',title='profile')
+@app.route('/summary')
+def summary():
+    return render_template('summary.html',title='summary')
     
 
 @app.route('/contact')
@@ -207,17 +164,22 @@ def info():
             db = getdb()
             user = db.query(User).filter_by(uid=session['id']).first()
             if user:
-                profile = db.query(Profile).filter_by(uid=session['id']).first()
-                return render_template('profile_info.html',
-                                title='Profile Information',
-                                profile=profile, user=user)
-            else:
-                return render_template('profile_info.html',title='Profile Information')
+                name = user.name
+                email = user.email
+                file = db.query(File).filter_by(uid=session['id']).first()
+                display_file = []
+                if file:
+                    file_name = file.filename
+                    file_type = file.file_type
+                    file_path = file.file_path
+                    created_on = file.created_at
+                    display_file.append((file_name,file_type,file_path,created_on))
+                    return render_template('info.html',title='info',
+                                           name=name,
+                                           display_file=display_file)
         except:
             flash('please create profile first','danger')
     return render_template('profile_info.html',title='Profile Information')
                            
-                           
-
 if __name__=="__main__":
     app.run(debug=True, host="0.0.0.0")

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Title</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS v5.2.1 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  <link rel="stylesheet" href="static/summary.css">
+</head>
+
+<body>
+    {% include "header.html" %}
+    {% include "notification.html" %}
+  <main>
+    <div class="wrapper">
+      <div class="summary-box">
+        <h2>SUMMARY</h2>
+        <div class="sb">
+        <label>Generated Summary</label>
+        <output name="summary" id="summary" cols="30" rows="10" readonly>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus eum quas iusto aliquid, enim ab nobis eveniet optio commodi consequatur veniam vero perferendis voluptatibus laborum atque ratione possimus minus quibusdam?Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus eum quas iusto aliquid, enim ab nobis eveniet optio commodi consequatur veniam vero perferendis voluptatibus laborum atque ratione possimus minus quibusdam?</p>
+          <p>
+        </output>
+        </div>
+        <div class="sb">
+        <label>Sentiment Analysis</label>
+        <output name="sentiment" id="sentiment" cols="30" rows="10" readonly>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus eum quas iusto aliquid, enim ab nobis eveniet optio commodi consequatur veniam vero perferendis voluptatibus laborum atque ratione possimus minus quibusdam?</p>
+        </output> 
+        </div>
+        <div>
+          <a href="/upload"><button type="submit" class="btn1">UPLOAD ANOTHER FILE</button></a> <a href="/"><button type="submit" class="btn2">CANCEL</button></a>
+        </div>
+        
+      </div>
+      
+    </div>
+
+  </main>
+  <footer>
+    <!-- place footer here -->
+  </footer>
+  <!-- Bootstrap JavaScript Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+  </script>
+</body>
+
+</html>

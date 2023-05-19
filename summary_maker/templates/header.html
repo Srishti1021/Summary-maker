@@ -4,7 +4,14 @@
         <a href="/">HOME</a>
       <a href="/about">ABOUT</a>
       <a href="/contact">CONTACT</a>
+      {% if not session.isauth %}
       <a href="/login">LOGIN</a>
       <a href="/signup">SIGNUP</a>
+      {% else %}
+      <a href="/info">PROFILE</a>
+      <a href="/upload">GENERATE SUMMARY</a>
+      <a href="/logout">LOGOUT</a>
+
+      {% endif %}
     </nav>
   </header>

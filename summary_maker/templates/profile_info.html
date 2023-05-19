@@ -23,27 +23,28 @@
       <form method="POST">
         <div class="output-box">
           <label>Name</label>
-          <output type="name" name="name" id="name" value="{{user.name}}" required></output>
+          <output type="name" name="name" id="name"  required></output>
           </div>
         <div class="output-box">
           <label>Email </label>
-          <output type="email" name="email" id="email" value="{{user.email}}" required>
+          <output type="email" name="email" id="email"required>
         </div>
         <div class="output-box">
-          <label>Contact Number</label>
-          <output type="number" name="contact" id="contact" value="{{profile.contact}}"  required>
+          <label>History </label>
+          <table>
+            {% for file in display_file %}
+                <tr>
+                  <td>{{file.name}}</td>
+                  <td>{{file.type}}</td>
+                  <td>{{file.path}}</td>
+                  <td>{{file.created_at}}</td>
+                </tr>
+            {% endfor %}
+            
+          </table>
           
         </div>
-        <div class="output-box">
-          <label>Gender</label>
-          <output type="gender" name="gender" id="gender" value="{{profile.gender}}" required>
-          
-        </div>
-        <div class="output-box">
-          <label>DOB</label>
-          <output type="date" name="dob" id="dob" value="{{profile.dob}}" required>
-          
-        </div>
+        
 
         </form>
       </div>
