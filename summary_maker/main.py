@@ -11,9 +11,13 @@ from database import User, File, Profile
 import re
 from utils import *
 from text_summarizer import text_summarizer
+from audio_to_text import transcript
+from video_to_audio import video_converter
 
 ALLOWED_EXTENSIONS = ['txt','pdf','wav','mp3', 'mp4', 'doc','docx', 'mov' , 'wmv', 'flv', 'avi' 'mkv', 'webm' ]
-
+audio_type = ['wav','mp3']
+video_type = ['mp4', 'mov' , 'wmv', 'flv', 'avi' 'mkv', 'webm' ]
+document_type = ['txt','pdf','doc','docx']
 app=Flask(__name__)
 app.secret_key = "Srishti Trivedi"
 app.config['UPLOAD_FOLDER'] = os.path.join('static','uploads')
@@ -121,7 +125,7 @@ def upload():
             print(text)
             result = text_summarizer(text)
             session['result'] = result
-            return redirect(url_for('view_file', name='summary', file_type='text'))
+            return redirect(url_for('summary', result=result))
 
         if 'file' in request.files:
             if file.filename == '':
@@ -138,15 +142,29 @@ def upload():
                 sess.commit()
                 del sess
                 flash('File Uploaded')
-                with open(file_path,'r') as f:
-                    text = f.read()
-                result = text_summarizer(text)
-                session['result'] = result
-                return redirect(url_for('view_file', name=filename, file_type=file_type))
+
+                if file_type in audio_type:
+                    result = transcript(file_path)
+                    return redirect(url_for('summary', summary=result ))
+                elif file_type in video_type:
+                    result = video_converter(file_path)
+                elif file_type in document_type:
+                    with open(file_path,'r') as f:
+                        text = f.read()
+                    result = text_summarizer(text)
+                    session['result'] = result
+                    return redirect(url_for('view_file', summary = result))
+            
     return render_template('upload.html',title='upload')
 
 @app.route('/summary')
 def summary():
+    if not session.get('isauth'):
+        flash('please login first','danger')
+        return redirect('/login')
+    else:
+        result=session['result']
+        return render_template('summary.html',title='summary',summary=result)
     return render_template('summary.html',title='summary')
     
 

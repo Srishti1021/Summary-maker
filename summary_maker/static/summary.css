@@ -10,7 +10,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-image: url("m2.jpg");
+    background-image: url("m6.jpg");
     background-size: cover;
     background-position: center;
 }
@@ -75,6 +75,8 @@ header {
     justify-content: center;
     align-items: center;
     margin-left: 750px;
+    margin-top: 45px;
+    margin-right: 750px;
     margin-top: 45px;
 
 }
