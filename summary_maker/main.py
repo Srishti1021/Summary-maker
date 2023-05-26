@@ -12,7 +12,7 @@ import re
 from utils import *
 from text_summarizer import text_summarizer
 from audio_to_text import transcript
-from video_to_audio import video_converter
+
 
 ALLOWED_EXTENSIONS = ['txt','pdf','wav','mp3', 'mp4', 'doc','docx', 'mov' , 'wmv', 'flv', 'avi' 'mkv', 'webm' ]
 audio_type = ['wav','mp3']

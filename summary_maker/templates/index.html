@@ -20,22 +20,24 @@
   <div class="row" style="margin-left: 3vh; margin-top: 10vh;"></div>
     <div class="col" >
         <h1>Summary Maker</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum asperiores ut, modi quasi quod unde labore libero tempora natus sapiente nobis odit reprehenderit quas dolore ipsam praesentium? Id, doloribus? Inventore accusamus harum quia maiores labore, accusantium et dolore quisquam, facilis deleniti saepe aliquid quasi aperiam beatae repellendus adipisci. Aliquam, cum.</p>
+        <p>Welcome to our multimedia summarization website! Here, we provide an innovative solution to help you efficiently navigate through vast amounts of multimedia content and extract the most relevant and important information. Whether you're dealing with videos, audio files, or images, our platform leverages advanced technologies to condense and summarize the content, saving you valuable time and effort.</p>
+        {% if not session.isauth %}
         <a href="/login"><button type="button">LOGIN</button></a>
         <a href="/signup"><button type="button">SIGN UP</button></a>
+        {% endif %}
     </div>
     <div class="col1">
         <div class="card card1">
             <h4>Text</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, aut!</p>
+            <p></p>
         </div>
         <div class="card card2">
             <h4>Audio</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, aut!</p>
+            <p></p>
         </div>
         <div class="card card3">
             <h4>Video</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, aut!</p>
+            <p></p>
         </div>
       </div>
       
